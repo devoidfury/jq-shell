@@ -1,0 +1,28 @@
+.shell { display: none; }
+.shell, .shell input { font: 16px/20px monospace; }
+.shell {
+    position: fixed;
+    z-index: 2000;
+    top: 0; bottom: 0; left: 0; right: 0;
+    padding: 40px;
+    background-color: #212121;
+    background-color: rgba(0,0,0,0.6);
+    color: #CCC;
+}
+
+.shell p { margin: 0; padding: 0;}
+.shell .green { color: #0F0; }
+.shell .red { color: #F00; }
+.shell .blue { color: #00F; }
+
+.shell input {
+    height: 20px;
+    border: none;
+    box-shadow: none;
+    background-color: transparent;
+    padding: 0;
+    margin: 0;
+    color: #0F0;
+}
+
+.shell input:focus { outline: none; }
