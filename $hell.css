@@ -1,14 +1,19 @@
-.shell { display: none; }
-.shell, .shell input { font: 16px/20px monospace; }
 .shell {
+    font: 16px/20px monospace;
     position: fixed;
     z-index: 2000;
-    top: 0; bottom: 0; left: 0; right: 0;
-    padding: 40px;
+    top: -100%; left: 0; right: 0;
+    height: 100%;
+    vertical-align: text-top;
     background-color: #212121;
     background-color: rgba(0,0,0,0.8);
+    padding: 40px;
     color: #CCC;
+    overflow: hidden;
+    -moz-transition:top 1s; -webkit-transition:top 1s; -o-transition:top 1s; transition:top 1s;
 }
+
+.shell.show { top: 0; }
 
 .shell p { margin: 0; padding: 0;}
 .shell .green { color: #0F0; }
@@ -17,12 +22,14 @@
 
 .shell input {
     height: 20px;
+    font: 16px/20px monospace;
+    vertical-align: bottom;
     border: none;
     box-shadow: none;
     background-color: transparent;
     padding: 0;
-    margin: 0;
+    resize: none;
     color: #0F0;
+    margin: 0 0 10px 0;
 }
-
 .shell input:focus { outline: none; }

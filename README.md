@@ -17,7 +17,7 @@ Basic usage:
         <script src="$hell.js"></script>
         <script>
             $('body').$hell();
-            $('a.shell-activator').on('click', function() { $('.shell').slideDown().trigger('click'); });
+            $('a.shell-activator').on('click', function() { $('.shell').addClass('show').trigger('click'); });
         </script>
     </body>
 </html>

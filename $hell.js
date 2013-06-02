@@ -66,19 +66,40 @@
         unknown: "command '{{cmd}}' not found"
     };
 
+
+    // for use in other commands
+    Shell.prototype.helpers = {
+        playAudio: function(text, vid_id) {
+            var str = text + ' (stop command to kill)<iframe width="0" height="0" src="';
+            str += 'https://www.youtube.com/embed/' + vid_id + '?autoplay=1&rel=0" frameborder="0" allowfullscreen></iframe>';
+            return str;
+        },
+        keys: function(obj) {
+            var keys = [];
+            for (var key in obj) { keys.push(key); }
+            return keys;
+        }
+    };
+
     // default commands
     Shell.prototype.cmds = {
         // print list of available commands
         help: function(shell, args, cb) {
-            var coms = [];
-            for (var command in shell.cmds) { coms.push(command); }
-            cb(0, coms.join('<br>'))
+            cb(0, '<a href="https://github.com/devoidfury/jq-shell">$hell</a> ' +
+                '- available commands:<br>' + shell.helpers.keys(shell.cmds).join(' '))
         },
-
+        clear: function(shell, args, cb) {
+            shell.$hell.find('p').remove();
+            cb(0);
+        },
+        stop: function(shell, args, cb) {
+            shell.$hell.find('iframe').remove();
+            cb(0, 'all audio/video stopped');
+        },
         // exit $hell
         exit: function(shell) {
             shell.$in.val(shell.opts.prompt);
-            shell.$hell.slideUp();
+            shell.$hell.removeClass('show');
         }
     };
 
@@ -94,6 +115,7 @@
         if (typeof code !== 'undefined') $p.addClass(code === 0 ? 'green' : 'red');
 
         $p.insertBefore(this.$in);
+        this.$hell.scrollTop(this.$hell[0].scrollHeight);
     };
 
     // focus the prompt
@@ -130,6 +152,7 @@
             case 13:
                 this.enforce(val, function(cmd, code, out) {
                     self.inscribe(cmd, false, code);
+
                     out && self.inscribe(out, true);
                     self.$in.val(self.opts.prompt);
                 });
