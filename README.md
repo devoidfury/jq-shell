@@ -22,3 +22,5 @@ Basic usage:
     </body>
 </html>
 ```
+
+Example: http://furycodes.com/ -- use the `++(terminal)` link at the bottom
