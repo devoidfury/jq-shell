@@ -23,4 +23,4 @@ Basic usage:
 </html>
 ```
 
-Example: http://devoidfury.github.io/jq-shell/
+Example: [http://devoidfury.github.io/jq-shell/index.html](http://devoidfury.github.io/jq-shell/index.html)
