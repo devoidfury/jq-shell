@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="en">
+<head><meta charset="utf-8">
+<title>jq-shell example</title>
+<link rel="stylesheet" type="text/css" href="../$hell.css">
+<style>
+	html, body { position: relative; min-height: 100%; height: 100%; background: #fff; color: #000 }
+	figure { background: #eee; padding: 5px } figcaption { font-style: italic } pre { background: #f8f8f8 }
+</style>
+</head>
+<body>
+	<h1>Demo jq-shell</h1>
+	<figure>
+		<pre></pre>
+		<figcaption>Source javascript code for this example.</figcaption>
+	</figure>
+	<button>Click Me</button>
+
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+	<script src="../$hell.js"></script>
+	<script id="source">
+	$('body').$hell({
+		commands: {
+			greet: function(shell, args, cb) {
+				cb(0, "Hello world!")
+			},
+			lipsum: function(shell, args, cb) {
+				$.get('http://dinoipsum.herokuapp.com/api/?format=text&paragraphs=1', function(text) {
+					cb(0, text)
+				})
+				.fail(function() {
+					cb(1, "segfault")
+				})
+			}
+		}
+	})
+	$('button').on('click', function() {
+		$('.shell').addClass('show').trigger('click')
+	})
+	$('pre').text($('#source').text())
+	</script>
+</body>
+</html>

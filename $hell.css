@@ -1,4 +1,5 @@
 .shell {
+    box-sizing: border-box;
     font: 16px/20px monospace;
     position: fixed;
     z-index: 2000;
@@ -16,7 +17,7 @@
 .shell.show { top: 0; }
 
 .shell p { margin: 0; padding: 0;}
-.shell .green { color: #0F0; }
+.shell .green, .shell a { color: #0F0; }
 .shell .red { color: #F00; }
 .shell .blue { color: #00F; }
 
