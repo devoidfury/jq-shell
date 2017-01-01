@@ -23,4 +23,4 @@ Basic usage:
 </html>
 ```
 
-Example: http://furycodes.com/ -- use the `++(terminal)` link at the bottom
+Example: http://devoidfury.github.io/jq-shell/
