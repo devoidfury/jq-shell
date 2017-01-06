@@ -1,0 +1,145 @@
+<!doctype html>
+<html lang="en">
+<head><meta charset="utf-8">
+<title>jq-shell example</title>
+<link rel="stylesheet" type="text/css" href="$hell.css">
+<style>
+/* demo styles */
+	html, body { position: relative; min-height: 100%; height: 100%; background: #fff; color: #000 }
+	figure { background: #eee; padding: 5px } figcaption { font-style: italic } pre { background: #f8f8f8 }
+
+/* theme styles */
+
+@-webkit-keyframes glitchone {
+	0% { opacity: 0.2; }
+	20% { opacity: 0; }
+	21% { opacity: 0.2; }
+	51% { opacity: 0.2; }
+	70% { opacity: 0; }
+	71% { opacity: 0.2; }
+}
+@keyframes glitchone {
+	0% { opacity: 0.2; }
+	20% { opacity: 0; }
+	21% { opacity: 0.2; }
+	51% { opacity: 0.2; }
+	70% { opacity: 0; }
+	71% { opacity: 0.2; }
+}
+
+@-webkit-keyframes scanline { from { top:-10px; } to { top:100%; }  }
+@keyframes scanline { from { top:-10px; } to { top:100%; }  }
+.shell.show:before {
+	content: '';
+	display: block;
+	position: absolute;
+	top: -1em;
+	left: 0;
+	width: 100%;
+	height: 1px;
+	background-color: #00FF00;
+	box-shadow: 0 0 1px 2px #00FF00;
+	opacity: 0.1;
+
+	-webkit-animation: 10s linear 0s infinite normal scanline, 10s linear 0s infinite normal glitchone;
+	animation: 10s linear 0s infinite normal scanline, 10s linear 0s infinite normal glitchone;
+	z-index: -1;
+}
+.shell.show:after {
+	content: '';
+	display: block;
+	position: absolute;
+	top: 0;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	opacity: 0.4;
+/*	background: repeating-linear-gradient(
+		0deg,
+		#222,
+		#222 3px,
+		#444 3px,
+		#444 6px,
+		#222 3px
+	) top;*/
+
+	background: repeating-linear-gradient(
+		to bottom,
+		#111,
+		#111 50%,
+		#333 50%,
+		#333);
+	background-size: 100% 8px;
+}
+
+
+
+@-webkit-keyframes glitchtwo {
+	0% { left: 0; }
+	50.9% { left: 0; }
+	51% { left: 3px; }
+	51.2% { left: 1px; }
+	51.8% { left: 0; }
+}
+@keyframes glitchtwo {
+	0% { left: 0; }
+	60.9% { left: 0; top: 0; }
+	61% { left: 1px; top: 1px;  }
+	61.5% { left: 0; top: 0; }
+	65% { left: 0; top: 0;  }
+	65.1% { left: -1px; top: -1px; }
+	65.6% { left: 0; top: 0; }
+}
+.shell p, .shell input {
+	position: relative;
+	left: 0;
+	-webkit-animation: 5s linear 0s infinite alternate glitchtwo;
+	animation: 5s linear 0s infinite alternate glitchtwo;
+}
+.shell {
+	color: #0F0;
+	font-size: 24px;
+	line-height: 30px;
+	text-shadow: 1px 1px 1px;
+	padding-top: 30px;
+	background: #000;
+}
+.shell input { height: 30px; text-shadow: 1px 1px 1px; }
+
+</style>
+</head>
+<body>
+	<h1>Demo jq-shell <a href="https://github.com/devoidfury/jq-shell">(on github)</a></h1>
+	<figure>
+		<pre></pre>
+		<figcaption>Source javascript code for this example.</figcaption>
+	</figure>
+	<button>Click Me</button>
+
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+	<script src="$hell.js"></script>
+
+	<!-- this just an example, see https://github.com/devoidfury/jq-shell -->
+	<script id="source">
+	$('body').$hell({
+		commands: {
+			greet: function(shell, args, cb) {
+				cb(0, "Hello world!")
+			},
+			lipsum: function(shell, args, cb) {
+				$.get('http://dinoipsum.herokuapp.com/api/?format=text&paragraphs=1', function(text) {
+					cb(0, text)
+				})
+				.fail(function() {
+					cb(1, "segfault")
+				})
+			}
+		}
+	})
+	$('button').on('click', function() {
+		$('.shell').addClass('show').trigger('click')
+	})
+	$('pre').text($('#source').text())
+	</script>
+</body>
+</html>

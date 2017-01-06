@@ -23,7 +23,7 @@
 
 .shell input {
     height: 20px;
-    font: 16px/20px monospace;
+    font: inherit;
     vertical-align: bottom;
     border: none;
     box-shadow: none;
